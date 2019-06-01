@@ -605,11 +605,11 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: bf8338d7-4ea1-48ce-96db-7a48bc85050b
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: You Are Tank
+  organizationId: blitzdevs
   cloudEnabled: 0
-  enableNativePlatformBackendsForNewInputSystem: 0
+  enableNativePlatformBackendsForNewInputSystem: 1
   disableOldInputManagerSupport: 0
   legacyClampBlendShapeWeights: 0
