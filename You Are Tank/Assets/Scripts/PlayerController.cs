@@ -10,9 +10,16 @@ public class PlayerController : MonoBehaviour
     public TankPart[,] parts;
     public bool isHolding;
 
+
+    public int scraps;
+    public int iron;
+    public int ammo;
+    public int fuel;
+
     private Rigidbody2D rb;
     private float rotationVelocity;
     private float moveVelocity;
+
 
     // Start is called before the first frame update
     void Start()

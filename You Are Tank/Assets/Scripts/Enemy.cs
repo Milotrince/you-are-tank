@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public TankPart heart;
     public int speed;
-    public List<List<TankPart>> parts;
+    public List<Item> drops;
 
+    private ItemSpawner itemSpawner;
     private Rigidbody2D rb;
     private Transform player;
     private float rotationVelocity;
@@ -18,13 +18,25 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerController>().transform;
+        itemSpawner = FindObjectOfType<ItemSpawner>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player);
+        Vector2 direction = new Vector2(player.position.x - transform.position.x,
+                                        player.position.y - transform.position.y);
+        transform.up = direction;
+
         rb.AddRelativeForce(Vector2.up * speed);
+    }
+
+    void Die()
+    {
+        foreach (Item item in drops)
+        {
+            itemSpawner.Spawn(item, transform.position);
+        }
     }
 
 }
