@@ -19,11 +19,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float rotationVelocity;
     private float moveVelocity;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
+        isHolding = false;
         parts = new TankPart[15, 15];
         rb = GetComponent<Rigidbody2D>();
     }
