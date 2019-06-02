@@ -7,6 +7,7 @@ public class WeaponPart : TankPart
     public GameObject bulletPrefab;
 
     public Transform turret;
+
     // Use this for initialization
     void Start()
     {
@@ -31,7 +32,8 @@ public class WeaponPart : TankPart
     
     public void Fire()
     {
-        GameObject newProjectile = Instantiate(bulletPrefab);
-        newProjectile.transform.rotation = transform.rotation;
+        GameObject newProjectileObject = Instantiate(bulletPrefab);
+        Projectile newProjectile = newProjectileObject.GetComponent<Projectile>();
+        newProjectile.Initialize(turret.transform);
     }
 }
