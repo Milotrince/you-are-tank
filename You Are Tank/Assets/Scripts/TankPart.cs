@@ -16,30 +16,40 @@ public class TankPart : MonoBehaviour
         controller = FindObjectOfType<PlayerController>();
     }
 
-    // Update is called once per frame
-    protected void Update()
+    private void OnMouseDrag()
     {
-        if (Input.GetMouseButton(0) && (Camera.main.ScreenToWorldPoint(transform.InverseTransformPoint(Input.mousePosition)).magnitude <= 50))
-        {
-            controller.isHolding = true;
-            transform.position = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(transform.InverseTransformPoint(Input.mousePosition)), 1);
-            if ((transform.TransformPoint(transform.position) - controller.transform.position).magnitude < 20)
-            {
-                transform.SetParent(controller.transform);
-            }
-            else
-            {
-                transform.SetParent(null);
-            }
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = Vector2.Lerp(transform.position, mousePosition, 1);
+        transform.SetParent(controller.transform);
+        if (Mathf.Abs(transform.localPosition.x) <= 7 &&
+            Mathf.Abs(transform.localPosition.y) <= 7) {
+            transform.localRotation = Quaternion.identity;
+            transform.localPosition = new Vector3(
+                                            Mathf.Round(transform.localPosition.x),
+                                            Mathf.Round(transform.localPosition.y),
+                                            0);
         }
         else
         {
-            controller.isHolding = false;
-        }
-        bool validLocation = true;
-        if (Input.GetMouseButtonUp(0) && !validLocation) {
             transform.SetParent(null);
         }
     }
 
+    private void OnMouseUp()
+    {
+        if (transform.parent == controller.transform)
+        {
+            bool added = controller.AddPartXY(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y), this);
+            
+            if (!added)
+            {
+                transform.SetParent(null);
+            }
+            
+        }
+    }
+    // Update is called once per frame
+    protected void Update()
+    {
+    }
 }

@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerController>().transform;
         itemSpawner = FindObjectOfType<ItemSpawner>();
+
+
+        Invoke("Die", 5f);
     }
 
     // Update is called once per frame

@@ -3,6 +3,9 @@ using System.Collections;
 
 public class WeaponPart : TankPart
 {
+
+    public GameObject bulletPrefab;
+
     public Transform turret;
     // Use this for initialization
     void Start()
@@ -10,6 +13,7 @@ public class WeaponPart : TankPart
 
 
     }
+
     protected void Update()
     {
         base.Update();
@@ -18,10 +22,16 @@ public class WeaponPart : TankPart
         Vector2 direction = new Vector2(mousePos.x - turret.position.x, 
                                         mousePos.y - turret.position.y);
         turret.up = direction;
-    }
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Fire();
+        }
+    }
+    
     public void Fire()
     {
-
+        GameObject newProjectile = Instantiate(bulletPrefab);
+        newProjectile.transform.rotation = transform.rotation;
     }
 }
