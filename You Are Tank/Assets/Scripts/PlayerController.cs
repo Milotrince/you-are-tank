@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float unit;
-
     public TankPart heart;
     public int speed;
     public List<List<TankPart>> parts;
@@ -32,5 +30,10 @@ public class PlayerController : MonoBehaviour
         //rb.AddForce(new Vector2(Mathf.Cos(rb.rotation) * moveVelocity, Mathf.Sin(rb.rotation) * moveVelocity));
         rb.AddRelativeForce(Vector2.up * moveVelocity);
         rb.angularVelocity += rotationVelocity;
+    }
+
+    public void AddPart()
+    {
+
     }
 }
