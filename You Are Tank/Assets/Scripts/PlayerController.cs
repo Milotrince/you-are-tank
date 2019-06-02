@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public int speed;
     public int totalHealth;
     public TankPart[,] parts;
+    public bool isHolding;
 
     private Rigidbody2D rb;
     private float rotationVelocity;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isHolding = false;
         parts = new TankPart[15, 15];
         rb = GetComponent<Rigidbody2D>();
     }
