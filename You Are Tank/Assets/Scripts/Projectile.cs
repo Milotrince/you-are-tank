@@ -4,19 +4,17 @@ using System.Collections;
 public class Projectile : MonoBehaviour
 {
     [Range(1, 100)] public int damage;
-    [Range(1.0f, 100.0f)] public float speed;
+    public float speed;
     private Rigidbody2D rb;
 
-    // Use this for initialization
-    void Start()
+    public void Initialize(Transform turret)
     {
-        rb.AddRelativeForce(Vector2.up * speed);
-    }
+        rb = GetComponent<Rigidbody2D>();
 
-    // Update is called once per frame
-    void Update()
-    {
+        transform.rotation = turret.rotation;
+        transform.position = turret.position;
 
+        rb.AddForce(transform.up * speed);
     }
 
     public void OnCollisionEnter(Collision collision)
