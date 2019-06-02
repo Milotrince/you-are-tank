@@ -45311,6 +45311,7 @@ MonoBehaviour:
   heart: {fileID: 1018854126}
   speed: 100
   totalHealth: 0
+  health: 0
   isHolding: 0
   scraps: 0
   iron: 0
