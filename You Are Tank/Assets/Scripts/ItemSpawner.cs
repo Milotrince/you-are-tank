@@ -14,7 +14,8 @@ public class ItemSpawner : MonoBehaviour
     public void Spawn(Item item, Vector3 location)
     {
         GameObject newItemObject= Instantiate(itemPrefab, transform);
-        newItemObject.transform.position = location;
+
+        newItemObject.transform.position = location +new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), 0);
         ItemController newItem = newItemObject.GetComponent<ItemController>();
         newItem.item = item;
 

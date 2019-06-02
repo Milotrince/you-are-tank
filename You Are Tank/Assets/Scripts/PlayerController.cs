@@ -7,34 +7,8 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
 
-    public TankPart heart;
-
-    public int speed;
-    public int totalHealth;
-    public TankPart[,] parts;
+    public TankEntity tankEntity;
     public bool isHolding;
-
-    public TMP_Text healthText;
-    public Slider healthSlider;
-
-    private int _health;
-    public int Health
-    {
-        get
-        {
-            return _health;
-        }
-        set
-        {
-            _health = value;
-            healthText.text = _health.ToString();
-            healthSlider.value = _health / totalHealth;
-            if (_health <= 0)
-            {
-                Die();
-            }
-        }
-    }
 
     private int _scraps;
     public int Scraps
@@ -103,32 +77,20 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tankEntity.Initialize();
         isHolding = false;
-        parts = new TankPart[15, 15];
-        rb = GetComponent<Rigidbody2D>();
-        parts[7, 7] = heart;
 
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerProjectile"));
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("EnemyProjectile"));
-    }
 
-    void UpdateTotalHealth()
-    {
-        totalHealth = 0;
-        for (int x = 0; x < 15; x++)
-        {
-            for (int y = 0; y < 15; y++)
-            {
-                totalHealth += parts[x, y].health;
-            }
-        }
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rotationVelocity = -Input.GetAxis("Horizontal") * speed;
-        moveVelocity = Input.GetAxis("Vertical") * speed;
+        rotationVelocity = -Input.GetAxis("Horizontal") * tankEntity.speed;
+        moveVelocity = Input.GetAxis("Vertical") * tankEntity.speed;
     }
 
     private void FixedUpdate()
@@ -137,40 +99,11 @@ public class PlayerController : MonoBehaviour
         rb.angularVelocity += rotationVelocity;
     }
 
-    public TankPart GetPartXY(int x, int y)
+
+    public void Die()
     {
-        //error checking
-        //Debug.Log("Trying to get " + x + " " + y);
-        x += parts.GetLength(0) / 2;
-        y += parts.GetLength(1) / 2;
-        if (x < 0 || x >= parts.GetLength(0) || y < 0 || y > parts.GetLength(1))
-        {
-            return null;
-        }
-        return parts[x, y];
+        Debug.Log("You die");
+        Destroy(gameObject);
     }
 
-    public bool AddPartXY(int x, int y, TankPart p)
-    {
-       if (GetPartXY(x, y) == null && 
-                x <= parts.GetLength(0)/2 && x > -parts.GetLength(0)/2 && 
-                y <= parts.GetLength(0)/2 && y > -parts.GetLength(1)/2 
-                && (GetPartXY(x + 1, y) != null || GetPartXY(x - 1, y) != null || 
-                GetPartXY(x, y + 1) != null || GetPartXY(x, y - 1) != null)
-                )
-        {
-            parts[x + parts.GetLength(0)/2, y + parts.GetLength(1)/2] = p;
-            p.gameObject.transform.SetParent(transform);
-            p.gameObject.layer = LayerMask.NameToLayer("Player");
-            //Debug.Log("AddPart true");
-            return true;
-        }
-        //Debug.Log("AddPart false");
-        return false;
-    }
-
-    void Die()
-    {
-        Debug.Log("You deaaaad");
-    }
 }
