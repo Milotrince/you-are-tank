@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         parts[7, 7] = heart;
 
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerProjectile"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("EnemyProjectile"));
     }
 
     void UpdateTotalHealth()
