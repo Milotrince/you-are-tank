@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float unit;
-
     public TankPart heart;
     public int speed;
     public int totalHealth;
