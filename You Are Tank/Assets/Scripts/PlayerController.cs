@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
         parts = new TankPart[15, 15];
         rb = GetComponent<Rigidbody2D>();
         parts[7, 7] = heart;
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerProjectile"));
     }
 
     void UpdateTotalHealth()
@@ -80,6 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             parts[x + parts.GetLength(0)/2, y + parts.GetLength(1)/2] = p;
             p.gameObject.transform.SetParent(transform);
+            p.gameObject.layer = LayerMask.NameToLayer("Player");
             //Debug.Log("AddPart true");
             return true;
         }
