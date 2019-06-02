@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public TankPart heart;
     public int speed;
-    public List<List<TankPart>> parts;
+    public int totalHealth;
+    public TankPart[,] parts;
 
     private Rigidbody2D rb;
     private float rotationVelocity;
@@ -15,7 +16,22 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        parts = new TankPart[15, 15];
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void UpdateTotalHealth()
+    {
+        totalHealth = 0;
+        for (int x = 0; x < 15; x++)
+        {
+            for (int y = 0; y < 15; y++)
+            {
+                totalHealth += parts[x, y].health;
+            }
+        }
+
+
     }
 
     // Update is called once per frame
@@ -32,8 +48,8 @@ public class PlayerController : MonoBehaviour
         rb.angularVelocity += rotationVelocity;
     }
 
-    public void AddPart()
+    public TankPart GetPartXY(int x, int y)
     {
-
+        return parts[x - (parts.GetLength(0)), y-(parts.GetLength(1)/2)];
     }
 }
