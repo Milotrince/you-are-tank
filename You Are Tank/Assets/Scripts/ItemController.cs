@@ -14,7 +14,6 @@ public class ItemController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Hit item");
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {

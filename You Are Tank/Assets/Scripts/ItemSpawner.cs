@@ -5,11 +5,6 @@ public class ItemSpawner : MonoBehaviour
 {
     public GameObject itemPrefab;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     public void Spawn(Item item, Vector3 location)
     {
@@ -21,6 +16,5 @@ public class ItemSpawner : MonoBehaviour
 
         SpriteRenderer spriteRenderer = newItem.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = item.sprite;
-        
     }
 }

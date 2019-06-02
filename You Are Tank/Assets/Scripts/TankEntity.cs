@@ -26,18 +26,6 @@ public class TankEntity : MonoBehaviour
         }
     }
 
-    //void UpdateTotalHealth()
-    //{
-    //    totalHealth = 0;
-    //    for (int x = 0; x < 15; x++)
-    //    {
-    //        for (int y = 0; y < 15; y++)
-    //        {
-    //            totalHealth += parts[x, y].health;
-    //        }
-    //    }
-    //}
-
     public TankPart GetPartXY(int x, int y)
     {
         //error checking
@@ -60,17 +48,41 @@ public class TankEntity : MonoBehaviour
                  GetPartXY(x, y + 1) != null || GetPartXY(x, y - 1) != null)
                  )
         {
-            parts[x + parts.GetLength(0) / 2, y + parts.GetLength(1) / 2] = p;
-            p.gameObject.transform.SetParent(transform);
-            p.gameObject.layer = gameObject.layer;
-            for (int i = 0; i < p.transform.childCount; i++)
+            if (p != null)
             {
-                Transform child = p.transform.GetChild(i);
-                child.gameObject.layer = gameObject.layer;
+                parts[x + parts.GetLength(0) / 2, y + parts.GetLength(1) / 2] = p;
+                p.gameObject.transform.SetParent(transform);
+                p.gameObject.layer = gameObject.layer;
+                for (int i = 0; i < p.transform.childCount; i++)
+                {
+                    Transform child = p.transform.GetChild(i);
+                    child.gameObject.layer = gameObject.layer;
+                }
+                p.tankEntity = this;
             }
-            p.tankEntity = this;
             return true;
         }
+        return false;
+    }
+
+    public bool RemovePart(TankPart p)
+    {
+        if (p == heart)
+        {
+            Debug.Log("Cannot remove heart part");
+            return false;
+        }
+
+        TankPart actualPart = GetPartXY(p.coordinate.x, p.coordinate.y);
+        if (actualPart == p)
+        {
+            AddPartXY(p.coordinate.x, p.coordinate.y, null);
+            p.transform.SetParent(null);
+
+            p.gameObject.layer = LayerMask.NameToLayer("Item");
+            return true;
+        }
+
         return false;
     }
 

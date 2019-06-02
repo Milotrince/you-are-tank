@@ -12,7 +12,7 @@ public class GameTimer : MonoBehaviour
     public float deltaTime;
 
     // reference to displayable text component
-    [SerializeField] private TMP_Text text;
+    public TMP_Text text;
 
     /// <summary>
     /// Called by Unity. For every frame this component is active,

@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     private Transform player;
     private Rigidbody2D rb;
     private ItemSpawner itemSpawner;
-    private List<WeaponPart> weaponParts;
     private float lastFired;
 
     // Start is called before the first frame update
@@ -25,15 +24,6 @@ public class Enemy : MonoBehaviour
         player = FindObjectOfType<PlayerController>().transform;
         itemSpawner = FindObjectOfType<ItemSpawner>();
         gameObject.layer = LayerMask.NameToLayer("Enemy");
-
-        weaponParts = new List<WeaponPart>();
-        foreach (TankPart part in tankEntity.parts)
-        {
-            if (part is WeaponPart)
-            {
-                weaponParts.Add((WeaponPart) part);
-            }
-        }
     }
 
     // Update is called once per frame
@@ -54,9 +44,15 @@ public class Enemy : MonoBehaviour
 
                 if (Time.timeSinceLevelLoad - lastFired > 1f)
                 {
-                    foreach (WeaponPart part in weaponParts)
+                    foreach (TankPart part in tankEntity.parts)
                     {
-                        part.Fire();
+                        if (part is WeaponPart)
+                        {
+                            WeaponPart weapon = (WeaponPart) part;
+                            Debug.Log("1 " + weapon);
+                            weapon.Fire();
+                            Debug.Log("2 " + weapon);
+                        }
                     }
                     lastFired = Time.timeSinceLevelLoad;
                 }
@@ -68,7 +64,10 @@ public class Enemy : MonoBehaviour
     {
         foreach (Item item in drops)
         {
-            itemSpawner.Spawn(item, transform.position);
+            if (Random.value > 0.3f)
+            {
+                itemSpawner.Spawn(item, transform.position);
+            }
         }
 
         Destroy(gameObject);

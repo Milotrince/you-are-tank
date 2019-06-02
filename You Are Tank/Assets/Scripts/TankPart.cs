@@ -101,7 +101,17 @@ public class TankPart : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //if (Random.value < 0.4f)
+            if (true)
+            {
+                Health = Mathf.RoundToInt(0.1f * maxHealth);
+                // detatch part
+                tankEntity.RemovePart(this);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
