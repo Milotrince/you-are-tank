@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public int health;
     public int speed;
     public List<Item> drops;
 
@@ -19,9 +20,6 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerController>().transform;
         itemSpawner = FindObjectOfType<ItemSpawner>();
-
-
-        Invoke("Die", 5f);
     }
 
     // Update is called once per frame
@@ -29,9 +27,13 @@ public class Enemy : MonoBehaviour
     {
         Vector2 direction = new Vector2(player.position.x - transform.position.x,
                                         player.position.y - transform.position.y);
-        transform.up = direction;
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        if (distance > 5 && distance < 20)
+        {
+            transform.up = direction;
+            rb.AddRelativeForce(Vector2.up * speed);
+        }
 
-        rb.AddRelativeForce(Vector2.up * speed);
     }
 
     void Die()

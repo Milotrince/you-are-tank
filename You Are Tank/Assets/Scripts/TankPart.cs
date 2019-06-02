@@ -8,7 +8,7 @@ public class TankPart : MonoBehaviour
     public int speed;
     public int mass;
     public Vector2Int coordinate;
-    private PlayerController controller;
+    protected PlayerController controller;
 
     // Start is called before the first frame update
     void Start()

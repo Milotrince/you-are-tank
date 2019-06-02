@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     public void Initialize(Transform turret)
     {
         rb = GetComponent<Rigidbody2D>();
+        //Physics2D.IgnoreCollision(GetComponent<Collider2D>(), turret.GetComponentInParent<Collider2D>());
 
         transform.rotation = turret.rotation;
         transform.position = turret.position;
@@ -17,7 +18,7 @@ public class Projectile : MonoBehaviour
         rb.AddForce(transform.up * speed);
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
