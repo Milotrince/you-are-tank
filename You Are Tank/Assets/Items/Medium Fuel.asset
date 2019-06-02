@@ -15,5 +15,5 @@ MonoBehaviour:
   scraps: 0
   iron: 0
   ammo: 0
-  fuel: 40
+  fuel: 10
   sprite: {fileID: 5441726001077081045, guid: 751fa103522c4e34ea9ed12388e25b96, type: 3}

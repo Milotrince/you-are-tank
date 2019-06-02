@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416dec372b58942a6b330ec7808e939c, type: 3}
   m_Name: Small Scrap
   m_EditorClassIdentifier: 
-  scraps: 5
+  scraps: 10
   iron: 0
   ammo: 0
   fuel: 0
