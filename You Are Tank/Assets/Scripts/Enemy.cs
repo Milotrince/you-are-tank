@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
     private Transform player;
     private float rotationVelocity;
     private float moveVelocity;
+    public GameObject bulletPrefab;
+
+    private IEnumerator fire;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +23,9 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerController>().transform;
         itemSpawner = FindObjectOfType<ItemSpawner>();
+        gameObject.layer = LayerMask.NameToLayer("Enemies");
+        fire = Fire();
+        StartCoroutine(fire);
     }
 
     // Update is called once per frame
@@ -33,7 +39,20 @@ public class Enemy : MonoBehaviour
             transform.up = direction;
             rb.AddRelativeForce(Vector2.up * speed);
         }
+    }
 
+    IEnumerator Fire() {
+        while (true) 
+        {
+            if ( Vector3.Distance(transform.position, player.transform.position) < 20)
+            {
+                GameObject newProjectileObject = Instantiate(bulletPrefab);
+                Projectile newProjectile = newProjectileObject.GetComponent<Projectile>();
+                newProjectile.Initialize(transform);
+                newProjectile.gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
+            }
+            yield return new WaitForSeconds(1);
+        }
     }
 
     void Die()
