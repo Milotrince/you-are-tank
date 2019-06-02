@@ -8,6 +8,7 @@ public class TankEntity : MonoBehaviour
     public TankPart[,] parts;
     private Rigidbody2D rb;
 
+
     public void Initialize()
     {
         parts = new TankPart[15, 15];

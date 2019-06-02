@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 416dec372b58942a6b330ec7808e939c, type: 3}
-  m_Name: Fuel
+  m_Name: Medium Fuel
   m_EditorClassIdentifier: 
   scraps: 0
   iron: 0
   ammo: 0
-  fuel: 20
-  sprite: {fileID: -2160026578067823044, guid: fd83dd332eafd4680879755fc7465638, type: 3}
+  fuel: 40
+  sprite: {fileID: 5441726001077081045, guid: 751fa103522c4e34ea9ed12388e25b96, type: 3}

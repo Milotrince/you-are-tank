@@ -4,6 +4,13 @@ using System.Collections;
 public class ItemController : MonoBehaviour
 {
     public Item item;
+    private SpriteRenderer spriteRenderer;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = item.sprite;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

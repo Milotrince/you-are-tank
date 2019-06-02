@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TankPart : MonoBehaviour
 {
     public Slider healthSlider;
-    public int totalHealth;
+    public int maxHealth;
     private HealthBarSpawner healthBarSpawner;
 
     private int _health;
@@ -20,7 +20,7 @@ public class TankPart : MonoBehaviour
         {
             _health = value;
             //healthText.text = _health.ToString();
-            healthSlider.value = _health / totalHealth;
+            healthSlider.value = (float) _health / maxHealth;
             if (_health <= 0)
             {
                 Die();
@@ -28,7 +28,6 @@ public class TankPart : MonoBehaviour
         }
     }
 
-    public int health;
     public int speed;
     public int mass;
     public Vector2Int coordinate;
@@ -40,7 +39,7 @@ public class TankPart : MonoBehaviour
     {
         player = FindObjectOfType<PlayerController>();
 
-        _health = totalHealth;
+        _health = maxHealth;
         healthBarSpawner = FindObjectOfType<HealthBarSpawner>();
         healthBarSpawner.Spawn(this);
     }

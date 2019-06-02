@@ -19,8 +19,9 @@ public class WeaponPart : TankPart
                                             mousePos.y - turret.position.y);
             turret.up = direction;
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && player.Ammo > 0)
             {
+                player.Ammo--;
                 Fire();
             }
         }

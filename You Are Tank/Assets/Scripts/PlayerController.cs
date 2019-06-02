@@ -69,9 +69,49 @@ public class PlayerController : MonoBehaviour
     public TMP_Text ammoText;
     public TMP_Text fuelText;
 
+    private SceneLoader sceneLoader;
+
     private Rigidbody2D rb;
     private float rotationVelocity;
     private float moveVelocity;
+
+    public Button ScrapsToAmmoButton;
+    public Button ScrapsToIronButton;
+    public Button IronToRepairButton;
+
+    void ScrapsToAmmo()
+    {
+        if (Scraps > 0)
+        {
+            Scraps -= 1;
+            Ammo += 3;
+        }
+    }
+
+    void ScrapsToIron()
+    {
+        if (Scraps >= 5)
+        {
+            Scraps -= 5;
+            Iron += 1;
+        }
+    }
+
+    void IronToRepair()
+    {
+        if (Iron > 0)
+        {
+            Iron -= 1;
+            foreach (TankPart part in tankEntity.parts)
+            {
+                Debug.Log(part);
+                if (part != null)
+                {
+                    part.Health = Mathf.Min(part.Health += 5, part.maxHealth);
+                }
+            }
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -84,6 +124,12 @@ public class PlayerController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("EnemyProjectile"));
 
         rb = GetComponent<Rigidbody2D>();
+
+        ScrapsToAmmoButton.onClick.AddListener(ScrapsToAmmo);
+        ScrapsToIronButton.onClick.AddListener(ScrapsToIron);
+        IronToRepairButton.onClick.AddListener(IronToRepair);
+
+        sceneLoader = FindObjectOfType<SceneLoader>();
     }
 
     // Update is called once per frame
@@ -104,6 +150,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("You die");
         Destroy(gameObject);
+        sceneLoader.LoadScene("Title");
     }
+
 
 }
