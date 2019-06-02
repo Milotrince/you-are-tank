@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public TankPart heart;
+
     public int speed;
     public int totalHealth;
+    public int health;
     public TankPart[,] parts;
     public bool isHolding;
-
 
     public int scraps;
     public int iron;
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rotationVelocity = Input.GetAxis("Horizontal") * speed;
+        rotationVelocity = -Input.GetAxis("Horizontal") * speed;
         moveVelocity = Input.GetAxis("Vertical") * speed;
     }
 
