@@ -6,11 +6,13 @@ public class Projectile : MonoBehaviour
     [Range(1, 100)] public int damage;
     public float speed;
     private Rigidbody2D rb;
+    private Vector3 origin;
 
-    public void Initialize(Transform turret)
+    public void Initialize(Transform turret, int layer)
     {
+        gameObject.layer = layer;
+        origin = turret.position;
         rb = GetComponent<Rigidbody2D>();
-        //Physics2D.IgnoreCollision(GetComponent<Collider2D>(), turret.GetComponentInParent<Collider2D>());
 
         transform.rotation = turret.rotation;
         transform.position = turret.position;
@@ -20,18 +22,22 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        if (player != null)
+        Collider2D childCollider = collision.GetContact(0).collider;
+        TankPart tankPart = childCollider.gameObject.GetComponent<TankPart>();
+        if (tankPart != null)
         {
-            player.Health -= damage;
-        }
-        else if (enemy != null)
-        {
-            enemy.Health -= damage;
+            tankPart.Health -= damage;
         }
 
         Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        if (Vector3.Distance(transform.position, origin) > 100f)
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

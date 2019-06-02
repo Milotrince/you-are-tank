@@ -21,7 +21,11 @@ public class UIFollowObject : MonoBehaviour
             Destroy(gameObject);
         }
 
-        transform.position = worldToUISpace(target.position + offset);
+        if (target != null)
+        {
+            transform.position = worldToUISpace(target.position + offset);
+            transform.rotation = target.rotation;
+        }
     }
 
     public Vector3 worldToUISpace(Vector3 worldPosition)

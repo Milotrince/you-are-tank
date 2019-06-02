@@ -9,10 +9,8 @@ public class WeaponPart : TankPart
     public Transform turret;
 
 
-    protected void Update()
+    void Update()
     {
-        base.Update();
-
         if (gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Vector3 mousePos = Input.mousePosition;
@@ -32,6 +30,8 @@ public class WeaponPart : TankPart
     {
         GameObject newProjectileObject = Instantiate(bulletPrefab);
         Projectile newProjectile = newProjectileObject.GetComponent<Projectile>();
-        newProjectile.Initialize(turret.transform);
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int layer = gameObject.layer == playerLayer ? LayerMask.NameToLayer("PlayerProjectile") : LayerMask.NameToLayer("EnemyProjectile");
+        newProjectile.Initialize(turret.transform, layer);
     }
 }
