@@ -34,11 +34,12 @@ public class TankPart : MonoBehaviour
         }
         else
         {
-            isHolding = false;
+            controller.isHolding = false;
         }
-        bool validLocation = false;
+        bool validLocation = true;
         if (Input.GetMouseButtonUp(0) && !validLocation) {
             transform.SetParent(null);
         }
     }
+
 }
