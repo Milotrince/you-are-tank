@@ -13,8 +13,11 @@ public class ItemSpawner : MonoBehaviour
 
     public void Spawn(Item item, Vector3 location)
     {
-        GameObject newItem = Instantiate(itemPrefab, transform);
-        newItem.transform.position = location;
+        GameObject newItemObject= Instantiate(itemPrefab, transform);
+        newItemObject.transform.position = location;
+        ItemController newItem = newItemObject.GetComponent<ItemController>();
+        newItem.item = item;
+
         SpriteRenderer spriteRenderer = newItem.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = item.sprite;
         

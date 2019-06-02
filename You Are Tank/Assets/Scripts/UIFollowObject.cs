@@ -6,7 +6,7 @@ public class UIFollowObject : MonoBehaviour
 {
     public Vector3 offset;
     public Transform target;
-    public Canvas canvas;
+    private Canvas canvas;
 
     private void Start()
     {
@@ -16,6 +16,11 @@ public class UIFollowObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+        {
+            Destroy(gameObject);
+        }
+
         transform.position = worldToUISpace(target.position + offset);
     }
 

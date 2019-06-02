@@ -3,10 +3,11 @@ using System.Collections;
 
 public class ItemController : MonoBehaviour
 {
-    Item item;
+    public Item item;
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Hit item");
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {

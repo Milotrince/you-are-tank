@@ -21,9 +21,14 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (player != null)
         {
             player.Health -= damage;
+        }
+        else if (enemy != null)
+        {
+            enemy.Health -= damage;
         }
 
         Destroy(gameObject);

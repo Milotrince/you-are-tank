@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
             _health = value;
             healthText.text = _health.ToString();
             healthSlider.value = _health / totalHealth;
+            if (_health <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -105,7 +109,7 @@ public class PlayerController : MonoBehaviour
         parts[7, 7] = heart;
 
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerProjectile"));
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("EnemyProjectile"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("EnemyProjectile"));
     }
 
     void UpdateTotalHealth()
@@ -163,5 +167,10 @@ public class PlayerController : MonoBehaviour
         }
         //Debug.Log("AddPart false");
         return false;
+    }
+
+    void Die()
+    {
+        Debug.Log("You deaaaad");
     }
 }
