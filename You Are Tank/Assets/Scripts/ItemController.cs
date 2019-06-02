@@ -10,10 +10,10 @@ public class ItemController : MonoBehaviour
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
-            player.scraps += item.scraps;
-            player.iron += item.iron;
-            player.ammo += item.ammo;
-            player.fuel += item.fuel;
+            player.Scraps += item.scraps;
+            player.Iron += item.iron;
+            player.Ammo += item.ammo;
+            player.Fuel += item.fuel;
 
             Destroy(gameObject);
         }

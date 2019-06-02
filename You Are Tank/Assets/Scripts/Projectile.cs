@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
-            player.health -= damage;
+            player.Health -= damage;
         }
 
         Destroy(gameObject);
