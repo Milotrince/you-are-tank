@@ -48,18 +48,16 @@ public class TankEntity : MonoBehaviour
                  GetPartXY(x, y + 1) != null || GetPartXY(x, y - 1) != null)
                  )
         {
-            if (p != null)
+            parts[x + parts.GetLength(0) / 2, y + parts.GetLength(1) / 2] = p;
+
+            p.gameObject.transform.SetParent(transform);
+            p.gameObject.layer = gameObject.layer;
+            for (int i = 0; i < p.transform.childCount; i++)
             {
-                parts[x + parts.GetLength(0) / 2, y + parts.GetLength(1) / 2] = p;
-                p.gameObject.transform.SetParent(transform);
-                p.gameObject.layer = gameObject.layer;
-                for (int i = 0; i < p.transform.childCount; i++)
-                {
-                    Transform child = p.transform.GetChild(i);
-                    child.gameObject.layer = gameObject.layer;
-                }
-                p.tankEntity = this;
+                Transform child = p.transform.GetChild(i);
+                child.gameObject.layer = gameObject.layer;
             }
+            p.tankEntity = this;
             return true;
         }
         return false;
@@ -76,7 +74,7 @@ public class TankEntity : MonoBehaviour
         TankPart actualPart = GetPartXY(p.coordinate.x, p.coordinate.y);
         if (actualPart == p)
         {
-            AddPartXY(p.coordinate.x, p.coordinate.y, null);
+            parts[p.coordinate.x + 7, p.coordinate.y + 7] = null;
             p.transform.SetParent(null);
 
             p.gameObject.layer = LayerMask.NameToLayer("Item");

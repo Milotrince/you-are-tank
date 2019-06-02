@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -49,9 +46,10 @@ public class Enemy : MonoBehaviour
                         if (part is WeaponPart)
                         {
                             WeaponPart weapon = (WeaponPart) part;
-                            Debug.Log("1 " + weapon);
-                            weapon.Fire();
-                            Debug.Log("2 " + weapon);
+                            if (part != null)
+                            {
+                                weapon.Fire();
+                            }
                         }
                     }
                     lastFired = Time.timeSinceLevelLoad;
@@ -64,7 +62,7 @@ public class Enemy : MonoBehaviour
     {
         foreach (Item item in drops)
         {
-            if (Random.value > 0.3f)
+            if (Random.value > 0.4f)
             {
                 itemSpawner.Spawn(item, transform.position);
             }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TankPart : MonoBehaviour
@@ -19,7 +17,6 @@ public class TankPart : MonoBehaviour
         set
         {
             _health = value;
-            //healthText.text = _health.ToString();
             healthSlider.value = (float) _health / maxHealth;
             if (_health <= 0)
             {
@@ -35,7 +32,7 @@ public class TankPart : MonoBehaviour
     public TankEntity tankEntity;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         player = FindObjectOfType<PlayerController>();
 
@@ -101,8 +98,7 @@ public class TankPart : MonoBehaviour
         }
         else
         {
-            //if (Random.value < 0.4f)
-            if (true)
+            if (Random.value < 1f)
             {
                 Health = Mathf.RoundToInt(0.1f * maxHealth);
                 // detatch part

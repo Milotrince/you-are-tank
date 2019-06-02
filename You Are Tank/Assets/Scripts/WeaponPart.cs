@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class WeaponPart : TankPart
 {
 
     public GameObject bulletPrefab;
-
     public Transform turret;
 
+    private EventSystem eventSystem;
+
+    void Start()
+    {
+        base.Start();
+        eventSystem = FindObjectOfType<EventSystem>();
+    }
 
     void Update()
     {
@@ -18,7 +25,7 @@ public class WeaponPart : TankPart
                                             mousePos.y - turret.position.y);
             turret.up = direction;
 
-            if (Input.GetButtonDown("Fire1") && player.Ammo > 0)
+            if (Input.GetButtonDown("Fire1") && player.Ammo > 0 && eventSystem.currentSelectedGameObject == null)
             {
                 player.Ammo--;
                 Fire();
