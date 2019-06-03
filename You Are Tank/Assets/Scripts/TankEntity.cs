@@ -28,8 +28,6 @@ public class TankEntity : MonoBehaviour
 
     public TankPart GetPartXY(int x, int y)
     {
-        //error checking
-        //Debug.Log("Trying to get " + x + " " + y);
         x += parts.GetLength(0) / 2;
         y += parts.GetLength(1) / 2;
         if (x < 0 || x >= parts.GetLength(0) || y < 0 || y > parts.GetLength(1))
